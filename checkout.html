@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #amdiv{
+            margin-left: 99%;
+        }
+        #movies{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="amdiv"></div>
+    <input type="text" placeholder="enter name" id="user_name">
+    <input type="text" placeholder="Number of seats" id="number_of_seats">
+    <button id="confirm" onclick="check()">Confirm</button>
+    
+    <div id="movies"></div>
+</body>
+</html>
+<script>
+    let moviedata=JSON.parse(localStorage.getItem("movie"));
+    console.log(moviedata);
+
+    // append(moviedata);
+    // function append(moviedata){
+        movies.innerHTML=null;
+        // moviedata.forEach(function(el){
+       let div=document.createElement("div");
+       // div.setAttribute("class","movie_tab");
+       //  div.style.display="flex";
+       //  div.style.gap="5px 5px"
+       let img=document.createElement("img");
+       img.src=moviedata.Poster;
+
+       let p=document.createElement("p");
+       p.innerText=moviedata.Title;
+
+    //    let btn=document.createElement("button");
+    //    btn.innerText="Book Now"
+    //    btn.setAttribute("class","book_now");
+    //    btn.addEventListener("click",function(){
+    //        booked(el);
+    //    })
+       div.append(img,p);
+       movies.append(div);
+//    });
+// }
+
+let preamount=JSON.parse(localStorage.getItem("amount"));
+  //console.log(typeof(preamount));
+preamount=(+preamount);
+let pl=document.createElement("h1");
+pl.innerText=preamount;
+amdiv.append(pl);
+//console.log(typeof(preamount));
+function check(preamount){
+let numb=document.getElementById("number_of_seats").value;
+let prod=1;
+  prod= prod*(+(numb))*100;
+  //console.log(prod);
+ if(preamount==prod ||preamount>prod ){
+    alert("Booking successful!")
+ }
+ else{
+    alert("Insufficient Balance!")
+ }
+//   valid(preamount,prod)
+}
+
+// function valid(a,b){
+//     if(a>b){
+//         alert("Booking successful!")
+//     }else{
+//         alert("Insufficient Balance!")
+//     }
+// }
+
+</script>

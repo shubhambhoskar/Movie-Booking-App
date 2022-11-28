@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <style>
+        #movies{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap:5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="search" oninput="debounce(main,1000)">
+   <!-- <input type="text" id="search" oninput="main()"> -->
+   <div id="movies"></div>
+</body>
+</html>
+<script>
+let movies=document.getElementById("movies");
+let id;
+
+let key=`6ea8dc9d`
+
+async function main(){
+    try {
+        let query=document.getElementById("search").value;
+        let res=await fetch(`https://www.omdbapi.com/?apikey=6ea8dc9d&s=${query}`);
+        let data=await res.json();
+        //console.log("data:",data);
+        //
+        console.log("ss-",data.Search);
+       append(data.Search);
+    }catch(err){
+        console.log(err);
+    }
+}
+
+function append(data){
+   
+    data.forEach(function(el){
+        let div=document.createElement("div");
+         div.setAttribute("class","movie_tab");
+        //  div.style.display="flex";
+        //  div.style.gap="5px 5px"
+        let img=document.createElement("img");
+        img.src=el.Poster;
+
+        let p=document.createElement("p");
+        p.innerText=el.Title
+
+        let btn=document.createElement("button");
+        btn.innerText="Book Now"
+        btn.setAttribute("class","book_now");
+        btn.addEventListener("click",function(){
+            booked(el);
+        })
+        div.append(img,p,btn);
+        movies.append(div);
+    });
+}
+// let arr=JSON.parse(localStorage.getItem("movie"))||[];
+function booked(el,index){
+// arr.push(el);
+localStorage.setItem("movie",JSON.stringify(el));
+// localStorage.setItem("movie",JSON.stringify(arr));
+window.location.href="checkout.html"
+}
+
+function debounce(func,delay){
+    if(id){
+        clearInterval(id);
+    }
+    id=setTimeout(function(){
+        func();
+    },delay)
+}
+</script>

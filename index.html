@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        #amdiv{
+            margin-left: 99%;
+            margin-top: 0px;
+        }
+        #cen{
+            margin-top: 10%;
+           
+        }
+    </style>
+</head>
+<body>
+    <div id="amdiv"></div>
+   <center id="cen">
+    <input type="number" id="amount" placeholder="Add amount">
+    <button id="add_to_wallet" onclick="add()">Add to cart</button>
+   
+   <button id="book_movies" onclick="get()">Book Movie</button>
+   </center>
+   
+    <!-- <button id="book_movies"><a href="movies.html"></a>Book Movie</button> -->
+</body>
+</html>
+<script>
+let btn=document.getElementById("book_movies");
+
+function get(){
+    window.location.href="movies.html"
+}
+    
+   
+
+function add(){
+    let am=document.getElementById("amount").value;
+    let div=document.createElement("div");
+
+    let p=document.createElement("h1");
+    p.innerText=am;
+    p.setAttribute("id","wallet")
+
+    div.append(p);
+    amdiv.append(div);
+
+
+    localStorage.setItem("amount",JSON.stringify(document.getElementById("amount").value))
+}
+</script>
